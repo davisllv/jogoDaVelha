@@ -1,35 +1,28 @@
-// const column1 = document.getElementById("column1");
-// const column2 = document.getElementById("column2");
-// const column3 = document.getElementById("column3");
-// const column4 = document.getElementById("column4");
-// const column5 = document.getElementById("column5");
-// const column6 = document.getElementById("column6");
-// const column7 = document.getElementById("column7");
-// const column8 = document.getElementById("column8");
-// const column9 = document.getElementById("column9");
-
-// let i = 1;
-// console.log(i);
-// if (i % 2 !== 0) {
-//   const column = document.getElementById(`column${i}`);
-//   column.addEventListener("click", () => {
-//     column.innerHTML = "<p>X</p>";
-//     i = i + 1;
-//   });
-// }
-
-// if (i % 2 === 0) {
-//   const column = document.getElementById(`column${i}`);
-//   column.addEventListener("click", () => {
-//     column.innerHTML = "<p>O</p>";
-//     i++;
-//   });
-// }
 let i = 1;
-const xImage = '<img src="../assets/xImage.png" alt="xImage">';
-const oImage = '<img src="../assets/image.png" alt="oImage">';
+let vencedor = "";
+const xImage = '<img src="../assets/JogodaVelha01.jpg" alt="xImage">';
+const oImage = '<img src="../assets/JogodaVelha02.jpg" alt="oImage">';
 
-window.addEventListener("click", (ev) => {
+const gameBox = document.querySelector(".game-box");
+
+function casasIguais(a, b, c) {
+  let bgA = document.querySelector("#column" + a);
+  let bgB = document.querySelector("#column" + b);
+  let bgC = document.querySelector("#column" + c);
+  console.log(bgA, bgB, bgC);
+  if (
+    bgA.className == bgB.className &&
+    bgB.className == bgC.className &&
+    bgA != "none" &&
+    bgA != ""
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+gameBox.addEventListener("click", (ev) => {
   if (i % 2 === 0) {
     const column = ev.target;
     column.innerHTML = oImage;
@@ -43,8 +36,7 @@ window.addEventListener("click", (ev) => {
   i++;
 
   if (i >= 5) {
-    const columnsList = document.querySelectorAll(".column");
-    console.log(columnsList);
+    console.log(casasIguais(1, 2, 3), casasIguais(4, 5, 6));
   }
   if (i > 9) {
     i = 1;
