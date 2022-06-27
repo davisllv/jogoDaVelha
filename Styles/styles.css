@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: "Roboto", sans-serif;
 }
 
 .main-container {
@@ -24,6 +25,7 @@
   width: 30vw;
   height: 60vh;
   border: 3px solid;
+  margin: 1.5rem 0 1.5rem 0;
 }
 
 .game-box > .row:nth-child(-n + 2) {
@@ -62,6 +64,22 @@
 
 .score {
   display: grid;
-  gap: 2rem;
+  gap: 3rem;
   grid-template-columns: 1fr 1fr;
+  margin-top: 1.5rem;
+}
+
+.scoreX,
+.scoreO {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.scoreX > img,
+.scoreO > img {
+  width: 4rem;
 }
