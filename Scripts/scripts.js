@@ -9,6 +9,9 @@ const xImage =
 const oImage =
   '<img class="imageGame" src="../assets/JogodaVelha02.jpg" alt="oImage"/>';
 
+const sucessContainer = document.querySelector("#sucess-container");
+const failureContainer = document.querySelector("#failure-container");
+
 const gameBox = document.querySelector(".game-box");
 const scoreX = document.querySelector(".scoreX");
 const scoreO = document.querySelector(".scoreO");
@@ -33,27 +36,60 @@ function casasIguais(a, b, c) {
   }
 }
 
+function testarVencedor() {
+  if (
+    casasIguais(1, 2, 3) ||
+    casasIguais(4, 5, 6) ||
+    casasIguais(7, 8, 9) ||
+    casasIguais(1, 4, 7) ||
+    casasIguais(2, 5, 8) ||
+    casasIguais(3, 6, 9) ||
+    casasIguais(1, 5, 9) ||
+    casasIguais(3, 5, 7)
+  ) {
+    return true;
+  }
+  return false;
+}
+
 function limparCasas() {
   i = 1;
-  console.log(document.querySelectorAll(".column"));
   const columnList = document.querySelectorAll(".column");
+  const imgList = document.querySelectorAll(".imageGame");
 
   columnList.forEach((it) => {
     it.className = "column";
   });
+
   setTimeout(() => {
-    const imgList = document.querySelectorAll(".imageGame");
     imgList.forEach((it) => {
       it.remove();
     });
-  }, 200);
-  console.log(document.querySelectorAll(".column"));
+  }, 900);
+
+  setTimeout(() => {
+    sucessContainer.style.display = "none";
+    failureContainer.style.display = "none";
+  }, 2000);
+}
+
+function abrirSucesso() {
+  if (i % 2 === 0) {
+    sucessContainer.style.display = "flex";
+    sucessContainer.textContent = "JOGADOR 1 FOI O VENCEDOR!";
+    placar.x++;
+    scoreX.children[1].textContent = `: ${placar.x}`;
+  } else {
+    sucessContainer.style.display = "flex";
+    sucessContainer.textContent = "JOGADOR 2 FOI O VENCEDOR";
+    placar.o++;
+    scoreO.children[1].textContent = `: ${placar.o}`;
+  }
+  limparCasas();
 }
 
 gameBox.addEventListener("click", (ev) => {
-  console.log(ev.target);
-
-  if (ev.target.className !== "imageGame") {
+  if (ev.target.className === "column") {
     if (i % 2 === 0) {
       const column = ev.target;
       column.innerHTML = oImage;
@@ -63,36 +99,22 @@ gameBox.addEventListener("click", (ev) => {
       column.innerHTML = xImage;
       column.classList.add("x");
     }
-    console.log(i);
     i++;
-    console.log(i);
 
-    if (i >= 5) {
-      if (
-        casasIguais(1, 2, 3) ||
-        casasIguais(4, 5, 6) ||
-        casasIguais(7, 8, 9) ||
-        casasIguais(1, 4, 7) ||
-        casasIguais(2, 5, 8) ||
-        casasIguais(3, 6, 9) ||
-        casasIguais(1, 5, 9) ||
-        casasIguais(3, 5, 7)
-      ) {
-        if (i % 2 === 0) {
-          console.log("O Vencedor foi X");
-          placar.x++;
-          scoreX.children[1].textContent = `: ${placar.x}`;
-        } else {
-          console.log("O Vencedor foi O");
-          placar.o++;
-          scoreO.children[1].textContent = `: ${placar.o}`;
-        }
-        limparCasas();
+    if (i >= 5 && i < 10) {
+      if (testarVencedor()) {
+        abrirSucesso();
       }
     }
+
     if (i > 9) {
+      if (testarVencedor()) {
+        abrirSucesso();
+      } else {
+        failureContainer.style.display = "flex";
+      }
+
       limparCasas();
-      console.log("Deu velha");
     }
   }
 });
