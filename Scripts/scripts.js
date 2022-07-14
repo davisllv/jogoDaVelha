@@ -1,9 +1,3 @@
-let i = 1;
-let placar = {
-  o: 0,
-  x: 0,
-};
-let vencedor = "";
 const xImage =
   '<img class="imageGame" src="../assets/JogodaVelha01.jpg" alt="xImage"/>';
 const oImage =
@@ -11,10 +5,28 @@ const oImage =
 
 const sucessContainer = document.querySelector("#sucess-container");
 const failureContainer = document.querySelector("#failure-container");
+const container = document.querySelector(".container");
 
 const gameBox = document.querySelector(".game-box");
 const scoreX = document.querySelector(".scoreX");
 const scoreO = document.querySelector(".scoreO");
+
+// ============ SELECIONADO JOGADOR ============
+function selecionarJogador(ev) {
+  container.style.display = "flex";
+  console.log(container);
+}
+
+// ============ FUNCIONAMENTO DO JOGO ============
+
+let i = 1;
+
+let placar = {
+  o: 0,
+  x: 0,
+};
+
+let vencedor = "";
 
 function casasIguais(a, b, c) {
   let columnA = document.querySelector("#column" + a);

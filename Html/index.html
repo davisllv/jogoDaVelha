@@ -16,12 +16,15 @@
   <body>
     <div class="main-container">
       <h1>Jogo da Velha</h1>
+
       <div class="btn-boxes">
-        <button>2 Jogadores</button>
-        <button>CONTRA IA</button>
+        <button class="player" onClick="selecionarJogador(event)">
+          2 JOGADORES
+        </button>
+        <button class="ia" onClick="selecionarJogador(event)">
+          JOGAR CONTRA IA
+        </button>
       </div>
-    </div>
-    <div class="main-game">
       <div class="container">
         <div class="game-box">
           <div class="row">

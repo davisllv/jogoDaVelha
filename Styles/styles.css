@@ -4,13 +4,35 @@
   font-family: "Roboto", sans-serif;
 }
 
-.main-container {
+
+.main-container{
   width: 100vw;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
+
+.btn-boxes{
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 1.5rem;
+}
+
+.btn-boxes > button{
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-weight: bold;
+}
+
+.btn-boxes > button:hover{
+  filter: brightness(0.8)
+}
+
+
 #sucess-container,
 #failure-container {
   width: 18rem;
@@ -46,12 +68,13 @@
 }
 
 .container {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 40vw;
+  width: 70vw;
   height: 60vh;
+  margin-top: 8rem;
 }
 
 .game-box {
