@@ -11,12 +11,6 @@ const gameBox = document.querySelector(".game-box");
 const scoreX = document.querySelector(".scoreX");
 const scoreO = document.querySelector(".scoreO");
 
-// ============ SELECIONADO JOGADOR ============
-function selecionarJogador(ev) {
-  container.style.display = "flex";
-  console.log(container);
-}
-
 // ============ FUNCIONAMENTO DO JOGO ============
 
 let i = 1;
@@ -100,18 +94,50 @@ function abrirSucesso() {
   limparCasas();
 }
 
-gameBox.addEventListener("click", (ev) => {
+function doisJogadores(ev) {
   if (ev.target.className === "column") {
-    if (i % 2 === 0) {
-      const column = ev.target;
-      column.innerHTML = oImage;
-      column.classList.add("o");
-    } else {
+    if (i % 2 !== 0) {
       const column = ev.target;
       column.innerHTML = xImage;
       column.classList.add("x");
+      i++;
+    } else {
+      const column = ev.target;
+      column.innerHTML = oImage;
+      column.classList.add("o");
+      i++;
     }
-    i++;
+
+    if (i >= 5 && i < 10) {
+      if (testarVencedor()) {
+        abrirSucesso();
+        console.log(this);
+      }
+    }
+
+    if (i > 9) {
+      if (testarVencedor()) {
+        abrirSucesso();
+      } else {
+        failureContainer.style.display = "flex";
+      }
+
+      limparCasas();
+    }
+  }
+}
+
+function jogandoContraIa(ev) {
+  if (ev.target.className === "column") {
+    if (i % 2 !== 0) {
+      const column = ev.target;
+      column.innerHTML = xImage;
+      column.classList.add("x");
+      i++;
+    } else {
+      console.log("gay");
+      i++;
+    }
 
     if (i >= 5 && i < 10) {
       if (testarVencedor()) {
@@ -129,4 +155,15 @@ gameBox.addEventListener("click", (ev) => {
       limparCasas();
     }
   }
-});
+}
+// ============ SELECIONADO JOGADOR ============
+
+function selecionarJogador(ev) {
+  container.style.display = "flex";
+  ev.path[1].style.display = "none";
+  if (ev.target.className === "player") {
+    gameBox.addEventListener("click", (ev) => doisJogadores(ev));
+  } else {
+    gameBox.addEventListener("click", (ev) => jogandoContraIa(ev));
+  }
+}
